@@ -8,6 +8,8 @@
  *  - fe00 - contains characteristics fe01, fe02, not currently used
  */
 
+var example = example || {};
+
 'use strict';
 
 const DEFAULT_SPEED = 50;
@@ -38,6 +40,7 @@ let ParrotDrone = function() {
   function _getUUID(uniqueSegment) {
     return '9a66' + uniqueSegment + '-0800-9191-11e4-012d1540cb8e';
   }
+
 
   function _startNotificationsForCharacteristic(serviceID, characteristicID) {
 
@@ -365,6 +368,84 @@ let ParrotDrone = function() {
 
   }
 
+  example.OSCController = function () {
+      this.oscPort = new osc.WebSocketPort({
+          url: "ws://localhost:80"
+      });
+
+      this.listen();
+      this.oscPort.open();
+
+      this.oscPort.socket.onmessage = function (e) {
+          console.log("message", e);
+      };
+  };
+  
+  example.OSCController.prototype.listen = function () {
+      // this.oscPort.on("message", this.mapMessage.bind(this));
+      this.oscPort.on("message", function (msg) {
+          console.log("message", msg);
+          var length = msg.args.length;
+          if(length === 1) {
+              if (msg.address === "/takeoff") {
+                console.log('Take off...');
+                return droneDevice.gatt.connect()
+                  .then(() => {
+                    // "Flat trim" which you are meant to call before taking off
+                    return _writeTo('fa00', 'fa0b', [2, ++steps.fa0b & 0xFF, 2, 0, 0, 0]);
+                  })
+                  .then(() => {
+                    // Actual command to take off
+                    return _writeTo('fa00', 'fa0b', [4, ++steps.fa0b, 2, 0, 1, 0]);
+                  })
+                  .then(() => {
+                    _startPing();
+                  })
+                  .catch(_onBluetoothError);
+              } else if (msg.address === "/land") {
+                console.log('Land...');
+                return droneDevice.gatt.connect()
+                  .then(() => {
+                    return _writeTo('fa00', 'fa0b', [4, ++steps.fa0b, 2, 0, 3, 0]);
+                  })
+                  .then(() => {
+                    clearInterval(ping);
+                  })
+                  .catch(_onBluetoothError);
+              } else if (msg.address === "/emergencyCutoff") {
+                console.warn('Emergency cut off!');
+                return droneDevice.gatt.connect()
+                  .then(() => {
+                    return _writeTo('fa00', 'fa0c', [0x02, ++steps.fa0c & 0xFF, 0x02, 0x00, 0x04, 0x00]);
+                  })
+                  .then(() => {
+                    clearInterval(ping);
+                  })
+                  .catch(_onBluetoothError);
+              } else if (msg.address === "/flip") {
+                console.log('Flip...');
+                return droneDevice.gatt.connect()
+                  .then(() => {
+                    // 2 is right, 3 is left, 1 is?
+                    return _writeTo('fa00', 'fa0b', [4, ++steps.fa0b, 2, 4, 0, 0, Number(msg.args[0]), 0, 0, 0]);
+                  })
+                  .catch(_onBluetoothError);
+              } else if (msg.address === "/forward") {
+                _setSpeed('pitch', DEFAULT_SPEED, DEFAULT_DRIVE_STEPS);
+              } else if (msg.address === "/left") {
+                  _setSpeed('yaw', -DEFAULT_SPEED, DEFAULT_DRIVE_STEPS);
+              } else if (msg.address === "/right") {
+                  _setSpeed('yaw', DEFAULT_SPEED, DEFAULT_DRIVE_STEPS);
+              } else if (msg.address === "/back") {
+                  _setSpeed('pitch', -DEFAULT_SPEED, DEFAULT_DRIVE_STEPS);
+              } else if (msg.address === "/hover") {
+                  _hover();
+              }
+          }
+      });
+  };
+  
+
   return {
 
     connect: function(disconnectCallback) {
@@ -483,7 +564,6 @@ let ParrotDrone = function() {
     moveRight: function() {
       _setSpeed('yaw', DEFAULT_SPEED, DEFAULT_DRIVE_STEPS);
     }
-
   };
 
 }

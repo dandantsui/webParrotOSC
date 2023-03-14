@@ -1,19 +1,33 @@
 {
-  "name": "web-bluetooth-parrot-drone",
-  "version": "1.1.0",
-  "description": "Controlling a Parrot Mini Drone from Chrome for Android, using Web Bluetooth",
+  "name": "express",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "version": "0.1.1",
+  "description": "Example of how to use osc.js in Node.js.",
+  "author": "Colin Clark",
+  "homepage": "http://flockingjs.org/",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/poshaughnessy/web-bluetooth-parrot-drone.git"
+    "url": "git://github.com/colinbdclark/osc.js-examples.git"
   },
-  "author": "Peter O'Shaughnessy",
-  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/poshaughnessy/web-bluetooth-parrot-drone/issues"
+    "url": "https://github.com/colinbdclark/osc.js/issues"
   },
-  "homepage": "https://github.com/poshaughnessy/web-bluetooth-parrot-drone#readme"
+  "license": "(MIT OR GPL-2.0)",
+  "keywords": [
+    "Open Sound Control",
+    "OSC",
+    "sound",
+    "audio",
+    "music",
+    "Flocking"
+  ],
+  "dependencies": {
+    "express": "^4.17.1",
+    "osc": "^2.4.2",
+    "osc-min": "^1.1.2",
+    "ws": "^7.5.3"
+  },
+  "scripts": {
+    "start": "node server.js"
+  }
 }

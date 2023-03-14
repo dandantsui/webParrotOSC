@@ -1,3 +1,5 @@
+// var example = example || {};
+
 (function() {
 
   const STATE_IDLE = 'IDLE';
@@ -7,9 +9,9 @@
 
   let state = STATE_IDLE;
   let connectButton;
+  let drone = ParrotDrone()
 
   function setupUI() {
-
     connectButton = document.getElementById('connectBtn');
 
     let drone = ParrotDrone(),
@@ -22,6 +24,7 @@
       flipButton = document.getElementById('flipBtn'),
       landButton = document.getElementById('landBtn'),
       emergencyButton = document.getElementById('emergencyBtn');
+
 
     connectButton.addEventListener('click', () => {
 
@@ -48,6 +51,33 @@
       }
     });
 
+  //   example.OSCController = function () {
+  //     this.oscPort = new osc.WebSocketPort({
+  //         url: "ws://localhost:80"
+  //     });
+
+  //     this.listen();
+  //     this.oscPort.open();
+
+  //     this.oscPort.socket.onmessage = function (e) {
+  //         console.log("message", e);
+  //     };
+  // };
+  //   example.OSCController.prototype.listen = function () {
+  //     // this.oscPort.on("message", this.mapMessage.bind(this));
+  //     this.oscPort.on("message", function (msg) {
+  //         console.log("message", msg);
+  //         var length = msg.args.length;
+  //         if(length === 1) {
+  //             if (msg.address === "/takeoff") {
+  //               console.log("i am taking off");
+  //               drone.takeOff
+  //             }
+  //         }
+  //     });
+  // };
+
+   
     takeOffButton.addEventListener('click', drone.takeOff);
     forwardButton.addEventListener('click', drone.moveForwards);
     backwardButton.addEventListener('click', drone.moveBackwards);
@@ -114,6 +144,10 @@
       });
     }
   }
+
+
+
+
 
   setupUI();
   installServiceWorker();

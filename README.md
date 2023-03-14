@@ -1,8 +1,8 @@
-# Web Bluetooth Parrot Mini Drone Controller
+# Web Bluetooth Parrot OSC Controller
 
 Controlling a Parrot Mini Drone from a web browser, using [Web Bluetooth](https://developers.google.com/web/updates/2015/07/interact-with-ble-devices-on-the-web?hl=en).
 
-![Parrot mini drone](docs/images/parrot-mini-drone.jpg?raw=true "Parrot mini drone") 
+![Parrot mini drone](dist/docs/images/parrot-mini-drone.jpg?raw=true "Parrot mini drone") 
 
 ## Demo Video
 
@@ -35,11 +35,11 @@ card up towards the drone from underneath. When it detects it has been touched, 
 
 * Press the 'Connect' button.
 
-![App screenshot](docs/images/app.png?raw=true "App screenshot")
+![App screenshot](dist/docs/images/app.png?raw=true "App screenshot")
 
 * Select your drone name to pair with.
 
-![Pair screen](docs/images/pair-screen.png?raw=true "Pair screen")
+![Pair screen](dist/docs/images/pair-screen.png?raw=true "Pair screen")
 
 * Now you're in control! Try Take Off, Flip and Land.  
 

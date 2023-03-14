@@ -2,6 +2,12 @@
 
 Controlling a Parrot Mini Drone from a web browser, using [Web Bluetooth](https://developers.google.com/web/updates/2015/07/interact-with-ble-devices-on-the-web?hl=en).
 
+## To run:
+- `node install` on both the root folder and `dist` folder
+- Run `node server.js` on Terminal/Command Prompt
+- Connect drone via website `127.0.0.1`
+- Send messages via the MaxMSP Patch through OSC on the `41234` port.
+
 ![Parrot mini drone](dist/docs/images/parrot-mini-drone.jpg?raw=true "Parrot mini drone") 
 
 ## Demo Video

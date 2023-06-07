@@ -1,6 +1,6 @@
 // var example = example || {};
 
-(function() {
+(function () {
 
   const STATE_IDLE = 'IDLE';
   const STATE_CONNECTING = 'CONNECTING';
@@ -51,33 +51,7 @@
       }
     });
 
-  //   example.OSCController = function () {
-  //     this.oscPort = new osc.WebSocketPort({
-  //         url: "ws://localhost:80"
-  //     });
 
-  //     this.listen();
-  //     this.oscPort.open();
-
-  //     this.oscPort.socket.onmessage = function (e) {
-  //         console.log("message", e);
-  //     };
-  // };
-  //   example.OSCController.prototype.listen = function () {
-  //     // this.oscPort.on("message", this.mapMessage.bind(this));
-  //     this.oscPort.on("message", function (msg) {
-  //         console.log("message", msg);
-  //         var length = msg.args.length;
-  //         if(length === 1) {
-  //             if (msg.address === "/takeoff") {
-  //               console.log("i am taking off");
-  //               drone.takeOff
-  //             }
-  //         }
-  //     });
-  // };
-
-   
     takeOffButton.addEventListener('click', drone.takeOff);
     forwardButton.addEventListener('click', drone.moveForwards);
     backwardButton.addEventListener('click', drone.moveBackwards);
@@ -88,7 +62,66 @@
     landButton.addEventListener('click', drone.land);
     emergencyButton.addEventListener('click', drone.emergencyCutOff);
 
+    example.OSCController = function () {
+      this.oscPort = new osc.WebSocketPort({
+        url: "ws://localhost:80"
+      });
+
+      this.listen();
+      this.oscPort.open();
+
+      this.oscPort.socket.onmessage = function (e) {
+        console.log("message", e);
+      };
+    };
+    example.OSCController.prototype.listen = function () {
+      // this.oscPort.on("message", this.mapMessage.bind(this));
+      this.oscPort.on("message", function (msg) {
+        console.log("message", msg);
+        var length = msg.args.length;
+        if (length === 1) {
+          if (msg.address === "/takeoff") {
+            console.log("i am taking off");
+            drone.takeOff();
+          } else if (msg.address === "/direction") {
+            if (msg.args[0] === "forward") {
+              drone.moveForwards();
+            } else if (msg.args[0] === "backward") {
+              drone.moveBackwards();
+            } else if (msg.args[0] === "left") {
+              drone.moveLeft();
+            } else if (msg.args[0] === "right") {
+              drone.moveRight();
+            }
+          } else if (msg.address === "/hover") {
+            drone.hover();
+          } else if (msg.address === "/flip") {
+            if (msg.args[0] === "left") {
+              drone.flipLeft();
+            } else if (msg.args[0] === "right") {
+              drone.flipRight();
+            } else if (msg.args[0] === "forward") {
+              drone.flipForward();
+            } else if (msg.args[0] === "backward") {
+              drone.flipBackward();
+            }
+          } else if (msg.address === "/land") {
+            drone.land();
+          } else if (msg.address === "/emergency") {
+            drone.emergencyCutOff();
+          }
+        } else if (length === 3) {
+          console.log("moving");
+          if (msg.address === "/move") {
+            console.log("inside move");
+            drone.move(msg.args[0], msg.args[1], msg.args[2]);
+          }
+        }
+      });
+    };
   }
+
+
 
   function onDisconnectCallback() {
     console.log('Disconnected callback');
@@ -137,9 +170,9 @@
 
   function installServiceWorker() {
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/sw.js').then(function(registration) {
+      navigator.serviceWorker.register('/sw.js').then(function (registration) {
         console.log('ServiceWorker registration successful with scope:', registration.scope);
-      }).catch(function(err) {
+      }).catch(function (err) {
         console.log('ServiceWorker registration failed:', err);
       });
     }

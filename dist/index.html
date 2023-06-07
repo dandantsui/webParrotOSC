@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="css/styles.css"/>
     <link rel="icon" type="image/png" href="images/app-icon-48.png"/>
     <link rel="manifest" href="manifest.json"/>
+     <!-- <script src="js/osc-js.js"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/osc/dist/osc-browser.min.js"></script> -->
   </head>
   <body>
 
@@ -36,7 +38,16 @@
 
     <p>v1.1 &middot; <a href="http://bit.ly/web-bluetooth-drone">Source code</a> &middot; <a href="https://github.com/poshaughnessy/web-bluetooth-parrot-drone/blob/master/docs/safety-warning.md">Safety warning</a></p>
 
+    <script src="node_modules/osc/dist/osc-browser.js"></script>
     <script src="js/drone.v1.2.js"></script>
     <script src="js/main.v1.2.js"></script>
+
+    <!-- <script src="js/osc-script.js"></script> -->
+  
+    <script>
+      var oscTest = new example.OSCController();
+    </script>
+
+  
   </body>
 </html>

@@ -2,8 +2,8 @@
 	"name" : "ParrotController",
 	"version" : 1,
 	"creationdate" : 3785272708,
-	"modificationdate" : 3785273557,
-	"viewrect" : [ 25.0, 124.0, 300.0, 500.0 ],
+	"modificationdate" : 3785295963,
+	"viewrect" : [ 25.0, 105.0, 300.0, 500.0 ],
 	"autoorganize" : 1,
 	"hideprojectwindow" : 0,
 	"showdependencies" : 1,
@@ -16,17 +16,17 @@
 				"toplevel" : 1
 			}
 ,
+			"Display_Data_KiCASS.maxpat" : 			{
+				"kind" : "patcher",
+				"local" : 1
+			}
+,
 			"KiCASS_CONFIG_TOOL2.4MINI.maxpat" : 			{
 				"kind" : "patcher",
 				"local" : 1
 			}
 ,
 			"bodyBitmapper1.maxpat" : 			{
-				"kind" : "patcher",
-				"local" : 1
-			}
-,
-			"Display_Data_KiCASS.maxpat" : 			{
 				"kind" : "patcher",
 				"local" : 1
 			}
@@ -42,6 +42,11 @@
 			}
 ,
 			"UDPRecords.maxpat" : 			{
+				"kind" : "patcher",
+				"local" : 1
+			}
+,
+			"caliScale.maxpat" : 			{
 				"kind" : "patcher",
 				"local" : 1
 			}
@@ -112,7 +117,7 @@
 				"kind" : "object"
 			}
 ,
-			"OSC-route.mxo" : 			{
+			"cv.jit.kalman.mxo" : 			{
 				"kind" : "object"
 			}
 ,
@@ -131,6 +136,16 @@
 				"local" : 1,
 				"singleton" : 				{
 					"bootpath" : "C74:/help/resources"
+				}
+
+			}
+,
+			"OSC-route.mxo" : 			{
+				"kind" : "object",
+				"local" : 1,
+				"singleton" : 				{
+					"bootpath" : "~/Documents/GitHub/KiCASSKinectSDK/KiCASS 2.1/KicassDemo2/externals",
+					"projectrelativepath" : "../../../KiCASSKinectSDK/KiCASS 2.1/KicassDemo2/externals"
 				}
 
 			}

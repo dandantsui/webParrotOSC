@@ -2,7 +2,7 @@
 	"name" : "ParrotController",
 	"version" : 1,
 	"creationdate" : 3785272708,
-	"modificationdate" : 3785302777,
+	"modificationdate" : 3785344662,
 	"viewrect" : [ 25.0, 105.0, 300.0, 500.0 ],
 	"autoorganize" : 1,
 	"hideprojectwindow" : 0,
@@ -14,6 +14,11 @@
 				"kind" : "patcher",
 				"local" : 1,
 				"toplevel" : 1
+			}
+,
+			"DataTriggers.maxpat" : 			{
+				"kind" : "patcher",
+				"local" : 1
 			}
 ,
 			"Display_Data_KiCASS.maxpat" : 			{
@@ -52,11 +57,6 @@
 			}
 ,
 			"jointpickerBP.maxpat" : 			{
-				"kind" : "patcher",
-				"local" : 1
-			}
-,
-			"DataTriggers.maxpat" : 			{
 				"kind" : "patcher",
 				"local" : 1
 			}
@@ -122,11 +122,6 @@
 				"kind" : "object"
 			}
 ,
-			"OSC-route.mxo" : 			{
-				"kind" : "object",
-				"local" : 1
-			}
-,
 			"cv.jit.kalman.mxo" : 			{
 				"kind" : "object"
 			}
@@ -148,6 +143,11 @@
 					"bootpath" : "C74:/help/resources"
 				}
 
+			}
+,
+			"OSC-route.mxo" : 			{
+				"kind" : "object",
+				"local" : 1
 			}
 
 		}
